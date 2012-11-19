@@ -1,20 +1,20 @@
+#!/usr/bin/env python3
 import sys
 import pygame
 pygame.init()
 
-width = 300
-hight = 300
+width = height = 300
 Xs_turn = True
 black = (0, 0, 0)
 blue = (0, 18, 194)
 red = (255, 165, 0)
-size = (hight+width)/2/5 #size of "X" and "o" is based on overall game size
+size = (height+width)/2/5 #size of "X" and "o" is based on overall game size
 running = True
 state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-pygame.display.set_mode((width, hight), 0, 32)
+pygame.display.set_mode((width, height), 0, 32)
 pygame.display.set_caption("Tic, Tac, Toe!")
-screen = pygame.display.set_mode((width, hight))
+screen = pygame.display.set_mode((width, height))
 
 class ai(object):
 	def check_if_allowed(area):
@@ -44,9 +44,9 @@ class mouse_handler(object):
 		else: 
 			column = 3
 		
-		if mouse_position[1] <= hight/3:
+		if mouse_position[1] <= height/3:
 			line = 1
-		elif mouse_position[1] <= (hight / 3) * 2:
+		elif mouse_position[1] <= (height / 3) * 2:
 			line = 2
 		else: 
 			line = 3
@@ -57,25 +57,25 @@ class mouse_handler(object):
 class draw(object):
 	def field():
 		color = black
-		pygame.draw.line(screen, (color), ((width/3)-2, hight), ((width/3)-2, 0), 5) #vertical lines
-		pygame.draw.line(screen, (color), (((width/3)*2), hight), (((width/3)*2), 0), 5) #vertical lines
-		pygame.draw.line(screen, (color), (0, hight/3), (width, (hight/3)), 5) #horizontal lines
-		pygame.draw.line(screen, (color), (0, (hight/3)*2), (width, (hight/3)*2), 5) #horizontal lines
+		pygame.draw.line(screen, (color), ((width/3)-2, height), ((width/3)-2, 0), 5) #vertical lines
+		pygame.draw.line(screen, (color), (((width/3)*2), height), (((width/3)*2), 0), 5) #vertical lines
+		pygame.draw.line(screen, (color), (0, height/3), (width, (height/3)), 5) #horizontal lines
+		pygame.draw.line(screen, (color), (0, (height/3)*2), (width, (height/3)*2), 5) #horizontal lines
 		print("Draw the field")
 		
 	def X(area):	
 		color = red
 		#print(area, "x")
 		xoff = width/3*(area[0]-1)+((width/3 - size)/2)
-		yoff = hight/3*(area[1]-1)+((hight/3 - size)/2)
+		yoff = height/3*(area[1]-1)+((height/3 - size)/2)
 		pygame.draw.line(screen, (color), (0 + xoff, size + yoff), (size + xoff, 0 + yoff), 5)
 		pygame.draw.line(screen, (color), (0 + xoff, 0 + yoff), (size + xoff, size + yoff), 5)
 		
 	def O(area):
 		color = blue
 		#print(area, "o")
-		xoff = (width/3)*(area[0]-1) + (hight+width)/2/6 
-		yoff = (hight/3)*(area[1]-1) + (hight+width)/2/6
+		xoff = (width/3)*(area[0]-1) + (height+width)/2/6 
+		yoff = (height/3)*(area[1]-1) + (height+width)/2/6
 		pos = (int(xoff), int(yoff))
 		pygame.draw.circle(screen, color, pos, int((size/2)), 5)
 		
